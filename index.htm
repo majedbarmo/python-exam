@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f0e5">
+  <meta name="description" content="منصة تفاعلية لمراجعة أساسيات Python والاستعداد للامتحان">
+  <title>مِداد | مراجعة Python</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"></script>
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <div class="progress-track"><div id="progressBar"></div></div>
+
+  <header class="navbar">
+    <a href="#" class="brand">
+      <span class="brand-icon">م</span>
+      <span>مِداد<span class="brand-dot">.</span></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#home">الرئيسية</a>
+      <a href="#lessons">الدروس</a>
+      <a href="#practice">التطبيق العملي</a>
+      <a href="#quiz">الاختبار</a>
+    </nav>
+
+    <button id="themeBtn" class="theme-btn" aria-label="تغيير المظهر" title="تغيير المظهر">☾</button>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-content">
+        <span class="eyebrow"><span class="live-dot"></span> منصتك لمراجعة امتحان Python</span>
+        <h1>تعلّم بذكاء.<br><span>تدرّب بثقة.</span></h1>
+        <p class="hero-description">
+          راجع أساسيات البرمجة خطوة بخطوة، جرّب الأكواد بنفسك،
+          وافهم الأخطاء قبل الامتحان.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#lessons">ابدأ المراجعة <span>←</span></a>
+          <a class="btn btn-secondary" href="#quiz">اختبر معلوماتك</a>
+        </div>
+
+        <div class="hero-stats">
+          <div><strong id="topicCount">22</strong><span>موضوعاً تعليمياً</span></div>
+          <div><strong>10</strong><span>أسئلة تدريبية</span></div>
+          <div><strong>100%</strong><span>تعلّم تفاعلي</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-glow"></div>
+        <div class="code-card">
+          <div class="code-card-top">
+            <div class="window-dots"><i></i><i></i><i></i></div>
+            <span>python.py</span>
+            <span class="code-status">● Python</span>
+          </div>
+          <div class="hero-code" dir="ltr">
+            <div><span class="line-number">01</span><span class="kw">name</span> = <span class="str">"Student"</span></div>
+            <div><span class="line-number">02</span><span class="kw">score</span> = <span class="num">95</span></div>
+            <div><span class="line-number">03</span></div>
+            <div><span class="line-number">04</span><span class="fn">print</span>(<span class="str">f"Hello {name}"</span>)</div>
+            <div><span class="line-number">05</span><span class="fn">print</span>(score)</div>
+          </div>
+          <div class="code-output" dir="ltr">
+            <span>OUTPUT</span>
+            <p>Hello Student</p>
+            <p>95</p>
+            <small>Process finished successfully</small>
+          </div>
+        </div>
+        <div class="floating-note note-top">✦ تعلّم عملي</div>
+        <div class="floating-note note-bottom">✓ جاهز للامتحان</div>
+      </div>
+    </section>
+
+    <section class="feature-strip">
+      <div><span class="feature-icon">⌘</span><div><strong>أمثلة واضحة</strong><small>افهم الكود خطوة بخطوة</small></div></div>
+      <div><span class="feature-icon">▷</span><div><strong>تشغيل مباشر</strong><small>جرّب Python داخل المتصفح</small></div></div>
+      <div><span class="feature-icon">✓</span><div><strong>تصحيح الأخطاء</strong><small>تعلّم من رسائل الخطأ</small></div></div>
+    </section>
+
+    <section class="section lessons-section" id="lessons">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">مكتبة المعرفة</span>
+          <h2>اختر موضوعك <span class="heading-dot">.</span></h2>
+          <p>اضغط على أي موضوع لعرض الشرح والمثال العملي.</p>
+        </div>
+        <div class="lesson-count"><strong id="visibleCount">22</strong><span> درساً</span></div>
+      </div>
+
+      <div class="lesson-toolbar">
+        <label class="search-box">
+          <span>⌕</span>
+          <input type="search" id="searchInput" placeholder="ابحث عن موضوع..." aria-label="ابحث عن موضوع">
+        </label>
+        <div class="filters" id="filters">
+          <button class="filter-btn active" data-filter="all">الكل</button>
+          <button class="filter-btn" data-filter="types">أنواع البيانات</button>
+          <button class="filter-btn" data-filter="logic">الشروط والتكرار</button>
+          <button class="filter-btn" data-filter="core">أساسيات أخرى</button>
+        </div>
+      </div>
+
+      <div id="topicGrid" class="topic-grid"></div>
+      <div id="emptyState" class="empty-state hidden">لم يتم العثور على موضوع مطابق.</div>
+    </section>
+
+    <section class="practice-section" id="practice">
+      <div class="section practice-layout">
+        <div class="practice-info">
+          <span class="eyebrow">مختبر البرمجة</span>
+          <h2>اكتب الكود.<br><span>شاهد النتيجة.</span></h2>
+          <p>عدّل المثال، ثم اضغط تشغيل. ستظهر النتيجة أو رسالة الخطأ في نافذة الإخراج.</p>
+
+          <div class="lesson-explanation">
+            <span class="explanation-label">شرح الدرس الحالي</span>
+            <h3 id="lessonTitle">النصوص — str</h3>
+            <p id="lessonDescription">النصوص تُستخدم لتخزين الحروف والكلمات.</p>
+          </div>
+
+          <div class="task-box">
+            <span>✦</span>
+            <div><strong>تحدّيك</strong><p id="lessonTask">غيّر النص واطبع النتيجة.</p></div>
+          </div>
+
+          <div class="tip-box">
+            <span>💡</span>
+            <p id="lessonTip">تذكّر: النصوص تُكتب بين علامات الاقتباس.</p>
+          </div>
+        </div>
+
+        <div class="editor-card">
+          <div class="editor-header">
+            <div class="window-dots"><i></i><i></i><i></i></div>
+            <span id="editorFilename">lesson.py</span>
+            <span class="language-badge">PYTHON 3</span>
+          </div>
+
+          <div class="editor-body" dir="ltr">
+            <div class="editor-gutter" id="lineNumbers">1</div>
+            <textarea id="codeEditor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="محرر كود Python"></textarea>
+          </div>
+
+          <div class="editor-actions">
+            <button id="runBtn" class="btn btn-primary run-btn"><span>▶</span> تشغيل الكود</button>
+            <button id="resetBtn" class="reset-btn">إعادة المثال ↺</button>
+            <span id="runStatus" class="run-status">جاهز للتشغيل</span>
+          </div>
+
+          <div class="console">
+            <div class="console-header"><span>⌁</span> نافذة الإخراج <button id="clearConsole">مسح</button></div>
+            <pre id="consoleOutput" dir="ltr">اضغط «تشغيل الكود» لرؤية النتيجة...</pre>
+          </div>
+          <p class="editor-footnote">يتم تشغيل الكود داخل المتصفح. لا تدخل كلمات مرور أو معلومات خاصة.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section quiz-section" id="quiz">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">تقييم سريع</span>
+          <h2>هل أنت مستعد؟ <span class="heading-dot">.</span></h2>
+          <p>أجب عن الأسئلة لمعرفة مدى فهمك للأساسيات.</p>
+        </div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-top">
+          <span id="quizProgressText">السؤال 1 من 10</span>
+          <span id="quizScore">النتيجة: 0</span>
+        </div>
+        <div class="quiz-progress"><div id="quizProgressBar"></div></div>
+        <h3 id="quizQuestion">جارٍ تحميل السؤال...</h3>
+        <div id="quizOptions" class="quiz-options"></div>
+        <div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>
+        <div class="quiz-actions">
+          <button id="checkAnswerBtn" class="btn btn-primary">تحقّق من الإجابة</button>
+          <button id="nextQuestionBtn" class="btn btn-secondary hidden">السؤال التالي ←</button>
+          <button id="restartQuizBtn" class="btn btn-secondary hidden">إعادة الاختبار ↺</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <span class="cta-star">✳</span>
+      <h2>كل خطوة تقرّبك من النجاح.</h2>
+      <p>تدرّب على الأمثلة، اقرأ رسائل الخطأ، ولا تتوقف عن المحاولة.</p>
+      <a href="#lessons" class="btn btn-light">تابع المراجعة ↑</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="#home" class="brand"><span class="brand-icon">م</span><span>مِداد<span class="brand-dot">.</span></span></a>
+    <p>منصة تعليمية لمراجعة أساسيات Python</p>
+    <span>صُنع للتعلّم بإتقان © <span id="year"></span></span>
+  </footer>
+
+  <button id="topButton" class="top-button" aria-label="العودة إلى الأعلى">↑</button>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>
